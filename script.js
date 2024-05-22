@@ -1,0 +1,1 @@
+let containerWheater = document.getElementsByClassName("containerWeather")
