@@ -1,0 +1,2 @@
+let API_KEY = "8d7d1e233ac34713955171947242205" 
+export default API_KEY 
