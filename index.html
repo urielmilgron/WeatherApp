@@ -14,11 +14,36 @@
                     <p class="eyebrow">Pronóstico</p>
                     <h1>WeatherApp</h1>
                 </div>
-                <button id="reloadBtn" type="button" class="reload-button">Actualizar</button>
+
+                <div class="header-actions">
+                    <label class="city-control country-control" for="countrySelect">
+                        <span>País</span>
+                        <select id="countrySelect" aria-label="Seleccionar país">
+                            <option value="Argentina" selected>Argentina</option>
+                            <option value="España">España</option>
+                            <option value="Brasil">Brasil</option>
+                        </select>
+                    </label>
+                    <label class="city-control city-control-main" for="citySelect">
+                        <span>Ciudad</span>
+                        <select id="citySelect" aria-label="Seleccionar ciudad"></select>
+                    </label>
+                    <button id="reloadBtn" type="button" class="reload-button">Actualizar</button>
+                </div>
             </header>
 
-            <div id="status" class="status">La app necesita tu clave de acceso</div>
-            <div id="weather" class="weather hidden" aria-live="polite"></div>
+            <div class="content-shell">
+                <div class="info-panel">
+                    <div id="status" class="status">La app necesita tu clave de acceso</div>
+                    <div id="weather" class="weather hidden" aria-live="polite"></div>
+                </div>
+
+                <div class="map-row">
+                    <div class="map-panel" aria-label="Mapa del país seleccionado">
+                        <div id="mapSurface" class="map-surface"></div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
