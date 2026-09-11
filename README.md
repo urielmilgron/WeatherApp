@@ -16,7 +16,7 @@ La app consulta la API de clima para Buenos Aires y muestra el pronóstico de lo
 
 ## Cómo arrancarla
 
-1. Copiar `example-ApiConfig.js` y renombrarlo a `ApiConfig.js` o `APIConfig.js`, según el nombre que use tu proyecto.
+1. Renombrar `example-ApiConfig.js` a `ApiConfig.js` o `APIConfig.js`, según el nombre que use tu proyecto.
 2. Reemplazar el placeholder por tu clave real de WeatherAPI.
 3. Abrir `index.html` en el navegador, o
 4. servir la carpeta localmente con un servidor estático simple.
@@ -25,7 +25,7 @@ La app consulta la API de clima para Buenos Aires y muestra el pronóstico de lo
 
 El proyecto usa la API de WeatherAPI para obtener datos meteorológicos en tiempo real.
 
-No requiere instalación de paquetes ni build tools; basta con abrir la página en un navegador y completar la clave en un archivo de configuración local. No dejes secretos reales dentro del repositorio.
+No requiere instalación de paquetes ni build tools; basta con abrir la página en un navegador y completar la clave en un archivo de configuración local. 
 
 ## Configuración segura
 
