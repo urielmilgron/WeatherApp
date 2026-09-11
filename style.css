@@ -179,11 +179,30 @@ h1 {
 }
 
 .error {
-    color: #fca5a5;
-    background: rgba(127, 29, 29, 0.25);
-    border: 1px solid rgba(248, 113, 113, 0.4);
+    color: #fee2e2;
+    background: rgba(127, 29, 29, 0.55);
+    border: 1px solid rgba(248, 113, 113, 0.7);
     border-radius: 12px;
-    padding: 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.22);
+}
+
+.error::before {
+    content: '✕';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(254, 202, 202, 0.18);
+    color: #fecaca;
+    font-size: 0.9rem;
+    font-weight: 800;
 }
 
 @media (max-width: 520px) {

@@ -39,6 +39,11 @@ function renderError(message) {
     statusElement.textContent = message;
     statusElement.classList.add('error');
     weatherElement.classList.add('hidden');
+    setButtonLoading(false);
+}
+
+function renderMissingApiKey() {
+    renderError('Error: falta la API key. Copiá example-ApiConfig.js a ApiConfig.js y agregá tu clave local.');
 }
 
 function renderWeather(data) {
@@ -77,15 +82,16 @@ function renderWeather(data) {
 
 async function fetchWeather() {
     const startTime = Date.now();
-    renderLoading();
-    setButtonLoading(true);
 
     try {
         if (!API_KEY || API_KEY.includes('[ACÁ') || API_KEY.includes('[')) {
-            await waitForMinimumLoading(startTime);
-            renderError('Falta completar la API key. Copiá example-ApiConfig.js a ApiConfig.js y reemplazá el placeholder.');
+            setButtonLoading(false);
+            renderMissingApiKey();
             return;
         }
+
+        renderLoading();
+        setButtonLoading(true);
 
         const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${encodeURIComponent(CITY)}&days=5&aqi=no&alerts=no`);
 
@@ -98,7 +104,7 @@ async function fetchWeather() {
         renderWeather(data);
     } catch (error) {
         await waitForMinimumLoading(startTime);
-        renderError('No se pudo cargar el clima. Revisá la configuración de la API.');
+        renderError('Error: no se pudo cargar el clima. Revisá la configuración de la API.');
     } finally {
         setButtonLoading(false);
     }
