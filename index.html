@@ -1,14 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeatherApp</title>
-    <script src="./script.js" type=module></script>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <section class="containerWeather">
+    <main class="weather-app">
+        <section class="weather-card">
+            <header class="weather-header">
+                <div>
+                    <p class="eyebrow">Pronóstico</p>
+                    <h1>WeatherApp</h1>
+                </div>
+                <button id="reloadBtn" type="button" class="reload-button">Actualizar</button>
+            </header>
 
-    </section>
+            <div id="status" class="status">Cargando pronóstico...</div>
+            <div id="weather" class="weather hidden" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <script type="module" src="./script.js"></script>
 </body>
 </html>

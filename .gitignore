@@ -27,6 +27,7 @@ yarn-error.log
 .env.development.local
 .env.test.local
 .env.production.local
+APIConfig.js
 
 # Archivos de respaldo y temporales
 *.bak
@@ -64,4 +65,7 @@ ehthumbs_vista.db
 # Archivos de configuración específicos del sistema operativo
 .DS_Store
 Thumbs.db
-APIConfig.js
+
+# Archivos generados por el flujo de documentación del proyecto
+WeatherApp-stack.md
+idea-ui-weatherapp.md
