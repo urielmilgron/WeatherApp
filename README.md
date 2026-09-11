@@ -25,13 +25,14 @@ La app consulta la API de clima para Buenos Aires y muestra el pronóstico de lo
 
 El proyecto usa la API de WeatherAPI para obtener datos meteorológicos en tiempo real.
 
-No requiere instalación de paquetes ni build tools; basta con abrir la página en un navegador y completar la clave en el archivo de configuración local. No dejes secretos reales dentro del repositorio.
+No requiere instalación de paquetes ni build tools; basta con abrir la página en un navegador y completar la clave en un archivo de configuración local. No dejes secretos reales dentro del repositorio.
 
 ## Configuración segura
 
 Este repositorio no incluye una clave real. Para usar el proyecto:
 
 1. copiar `example-ApiConfig.js`
-2. renombrarlo a `ApiConfig.js`
+2. renombrarlo a `ApiConfig.js` o `APIConfig.js` en tu entorno local
 3. reemplazar `[ACÁ VA TU API KEY]` por tu clave real
-4. guardar la versión real fuera del repositorio si es un proyecto compartido
+4. guardar la versión real fuera del repositorio, por ejemplo en una carpeta local no versionada
+5. no commitear ni pushear el archivo real de configuración

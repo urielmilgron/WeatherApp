@@ -10,12 +10,21 @@ const MIN_LOADING_TIME_MS = 2000;
 function setButtonLoading(isLoading) {
     if (!reloadButton) return;
 
+    const buttonLabel = reloadButton.dataset.buttonLabel || 'Actualizar';
+
     reloadButton.disabled = isLoading;
     reloadButton.classList.toggle('loading', isLoading);
     reloadButton.setAttribute('aria-busy', String(isLoading));
     reloadButton.innerHTML = isLoading
         ? '<span class="spinner" aria-hidden="true"></span><span>Actualizando...</span>'
-        : 'Actualizar';
+        : buttonLabel;
+}
+
+function setButtonReady(label = 'Actualizar') {
+    if (!reloadButton) return;
+
+    reloadButton.dataset.buttonLabel = label;
+    setButtonLoading(false);
 }
 
 function waitForMinimumLoading(startTime) {
@@ -30,7 +39,7 @@ function waitForMinimumLoading(startTime) {
 }
 
 function renderLoading() {
-    statusElement.textContent = 'Cargando pronóstico...';
+    statusElement.textContent = 'Buscando el pronóstico...';
     weatherElement.classList.add('hidden');
     statusElement.classList.remove('error');
 }
@@ -39,11 +48,15 @@ function renderError(message) {
     statusElement.textContent = message;
     statusElement.classList.add('error');
     weatherElement.classList.add('hidden');
-    setButtonLoading(false);
+    setButtonReady('Reintentar');
 }
 
 function renderMissingApiKey() {
-    renderError('Error: falta la API key. Copiá example-ApiConfig.js a ApiConfig.js y agregá tu clave local.');
+    renderError('Falta la clave de acceso. Copiá el ejemplo y agregá tu API key local para continuar.');
+}
+
+function renderRequestFailure() {
+    renderError('No pudimos cargar el clima. Revisá tu conexión y la clave de la API.');
 }
 
 function renderWeather(data) {
@@ -85,7 +98,7 @@ async function fetchWeather() {
 
     try {
         if (!API_KEY || API_KEY.includes('[ACÁ') || API_KEY.includes('[')) {
-            setButtonLoading(false);
+            setButtonReady('Reintentar');
             renderMissingApiKey();
             return;
         }
@@ -96,7 +109,7 @@ async function fetchWeather() {
         const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${encodeURIComponent(CITY)}&days=5&aqi=no&alerts=no`);
 
         if (!response.ok) {
-            throw new Error('No se pudo obtener el pronóstico.');
+            throw new Error(`API error: ${response.status}`);
         }
 
         const data = await response.json();
@@ -104,13 +117,13 @@ async function fetchWeather() {
         renderWeather(data);
     } catch (error) {
         await waitForMinimumLoading(startTime);
-        renderError('Error: no se pudo cargar el clima. Revisá la configuración de la API.');
+        renderRequestFailure();
     } finally {
-        setButtonLoading(false);
+        setButtonReady('Reintentar');
     }
 }
 
 reloadButton.addEventListener('click', fetchWeather);
-setButtonLoading(false);
+setButtonReady('Actualizar');
 fetchWeather();
 
