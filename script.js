@@ -13,11 +13,11 @@ const MIN_LOADING_TIME_MS = 2000;
 
 const COUNTRY_CITIES = {
     Argentina: [
-        { name: 'Buenos Aires', x: 57, y: 70 },
-        { name: 'Córdoba', x: 48, y: 58 },
-        { name: 'Rosario', x: 55, y: 64 },
-        { name: 'Mendoza', x: 36, y: 52 },
-        { name: 'Bariloche', x: 32, y: 30 }
+        { name: 'Buenos Aires', x: 56.8, y: 39.4 },
+        { name: 'Córdoba', x: 50.0, y: 28.0 },
+        { name: 'Rosario', x: 52.2, y: 24.9 },
+        { name: 'Mendoza', x: 40.2, y: 34.5 },
+        { name: 'Bariloche', x: 38.5, y: 49.2 }
     ],
     España: [
         { name: 'Madrid', x: 58, y: 46 },
@@ -34,9 +34,13 @@ const COUNTRY_CITIES = {
 };
 
 const COUNTRY_SHAPES = {
-    Argentina: 'M18 17 L31 12 L42 10 L55 15 L67 18 L74 24 L81 31 L86 40 L88 53 L83 66 L77 75 L71 83 L62 90 L52 94 L41 90 L33 86 L25 78 L18 68 L12 59 L10 47 L12 35 L15 26 Z',
+    Argentina: 'M18 16 L28 12 L40 9 L52 12 L61 15 L70 18 L79 26 L85 37 L88 49 L84 60 L78 70 L72 80 L66 88 L58 94 L49 95 L40 92 L33 87 L25 79 L18 70 L13 58 L11 47 L12 35 L15 24 Z',
     España: 'M42 19 L52 14 L62 17 L71 24 L76 32 L74 41 L69 49 L73 57 L67 66 L61 74 L52 79 L45 77 L39 70 L32 62 L27 53 L29 42 L34 30 L38 24 Z',
     Brasil: 'M24 23 L36 16 L49 15 L60 20 L70 28 L78 38 L82 49 L80 60 L74 72 L68 80 L60 88 L50 92 L39 88 L30 79 L23 69 L17 58 L14 45 L16 32 L20 27 Z'
+};
+
+const COUNTRY_SVG_ASSETS = {
+    Argentina: './assets/Argentina.svg'
 };
 
 function getSelectedCountry() {
@@ -66,11 +70,15 @@ function renderMap() {
     const country = getSelectedCountry();
     const cities = COUNTRY_CITIES[country] || COUNTRY_CITIES[DEFAULT_COUNTRY];
     const selectedCity = getSelectedCity();
+    const countryAsset = COUNTRY_SVG_ASSETS[country] || COUNTRY_SVG_ASSETS[DEFAULT_COUNTRY];
+    const isArgentinaAsset = country === 'Argentina';
 
     mapSurface.innerHTML = `
-        <svg class="country-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-label="Mapa de ${country}">
-            <path class="country-fill" d="${COUNTRY_SHAPES[country] || COUNTRY_SHAPES[DEFAULT_COUNTRY]}" />
-        </svg>
+        ${isArgentinaAsset && countryAsset ? `<img class="country-svg country-svg-file" src="${countryAsset}" alt="Mapa de ${country}" />` : `
+            <svg class="country-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-label="Mapa de ${country}">
+                <path class="country-fill" d="${COUNTRY_SHAPES[country] || COUNTRY_SHAPES[DEFAULT_COUNTRY]}" />
+            </svg>
+        `}
         ${cities
             .map((city) => `
                 <button

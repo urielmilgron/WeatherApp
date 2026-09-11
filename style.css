@@ -43,11 +43,12 @@ body {
     flex-wrap: wrap;
     justify-content: flex-end;
     min-height: 110px;
+    margin-left: -18px;
 }
 
 .content-shell {
     display: grid;
-    grid-template-columns: minmax(0, 1.55fr) minmax(340px, 1.25fr);
+    grid-template-columns: minmax(0, 1.7fr) minmax(330px, 1.25fr);
     gap: 20px;
     align-items: stretch;
     margin-top: 0;
@@ -109,6 +110,16 @@ body {
     inset: 0;
     width: 100%;
     height: 100%;
+}
+
+.country-svg-file {
+    object-fit: cover;
+    object-position: center;
+    padding: 12px 14px 12px;
+    opacity: 0.96;
+    filter: drop-shadow(0 0 18px rgba(96, 165, 250, 0.2));
+    transform: scale(1.09);
+    transform-origin: center;
 }
 
 .country-fill {
